@@ -1,3 +1,8 @@
+/* =================================================== *
+ * ====        Copyright (c) 2024 icampsi         ==== *
+ * ==== SPDX-License-Identifier: GPL-3.0-or-later ==== *
+ * =================================================== */
+
 #include "Marcador.h"
 #include "MarcLbl.h"
 #include <QRandomGenerator>
@@ -10,7 +15,6 @@ Marcador::Marcador(QWidget *parent) :
     // Empty layout
     layout = new QVBoxLayout(this);
     ui->frame_board->setLayout(layout);
-
 
     // Random Color stylesheet
     QString widgetColorString = QString("QFrame#frame_board { background-color: rgba(%1, %2, %3, %4); }").arg(50)

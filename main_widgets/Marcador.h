@@ -1,9 +1,19 @@
+/* =================================================== *
+ * ====        Copyright (c) 2024 icampsi         ==== *
+ * ==== SPDX-License-Identifier: GPL-3.0-or-later ==== *
+ * =================================================== */
+
 #ifndef MARCADOR_H
 #define MARCADOR_H
 
-#include <QWidget>
-#include <QVBoxLayout>
 #include "ui_Marcador.h"
+
+#include <QVBoxLayout>
+#include <QWidget>
+#include <QTimer>
+#include <QPushButton>
+#include <QPixmap>
+#include <QtMultimedia/QMediaPlayer>
 
 class MarcLbl;
 

@@ -1,5 +1,10 @@
+# =================================================== *
+# ====         Copyright (c) 2024 icampsi        ==== *
+# ==== SPDX-License-Identifier: GPL-3.0-or-later ==== *
+# =================================================== */
+
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
-project(ruleta VERSION 0.1.0 LANGUAGES CXX)
+project(ruleta VERSION 0.1.1 LANGUAGES CXX)
 
 # Warning level
 if (MSVC)
@@ -21,7 +26,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}")
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Multimedia)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Multimedia)
 if(Qt${QT_VERSION_MAJOR}_FOUND)
-    message("Found Poppler library: ${POPPLER_CPP_LIB}")
+    message("Found Qt library")
 else()
     message(FATAL_ERROR "Qt Widgets not found")
 endif()
@@ -29,41 +34,46 @@ endif()
 set(MAIN_FILES
     # SRC
     main.cpp
-    WWheel.h    WWheel.cpp  WWheel.ui
+    # MAIN_WIDGETS
+    main_widgets/WWheel.h       main_widgets/WWheel.cpp     main_widgets/WWheel.ui
+    main_widgets/MarcLbl.h      main_widgets/MarcLbl.cpp    main_widgets/MarcLbl.ui
+    main_widgets/Marcador.h     main_widgets/Marcador.cpp   main_widgets/Marcador.ui
+    main_widgets/CTimer.h       main_widgets/CTimer.cpp     main_widgets/CTimer.ui
+
+    # UI
+    ui/MainWindow.h ui/MainWindow.cpp ui/MainWindow.ui
+    ui/dialog.h ui/dialog.cpp ui/dialog.ui
+    ui/TimerDialog.h ui/TimerDialog.cpp ui/TimerDialog.ui
+    ui/propertiesdialog.h ui/propertiesdialog.cpp ui/propertiesdialog.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(ruleta
+    qt_add_executable(${PROJECT_NAME}
         MANUAL_FINALIZATION
         ${MAIN_FILES}
-        MainWindow.h MainWindow.cpp MainWindow.ui
-        MarcLbl.h MarcLbl.cpp MarcLbl.ui
-        Marcador.h Marcador.cpp Marcador.ui
-        dialog.h dialog.cpp dialog.ui
-
-
+        resources/resources.qrc
     )
 
 else()
     if(ANDROID)
-        add_library(ruleta SHARED
+        add_library(${PROJECT_NAME} SHARED
         )
     else()
-        add_executable(ruleta
+        add_executable(${PROJECT_NAME}
             ${MAIN_FILES}
         )
     endif()
 endif()
 
 # Set the output directory for the executable
-set_target_properties(ruleta PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 # Add current source dir as a include path
-target_include_directories(ruleta PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # LINK LIBRARIES
 # QT
-target_link_libraries(ruleta PRIVATE
+target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Multimedia
 )
@@ -72,7 +82,7 @@ if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.FindWhat)
 endif()
 
-set_target_properties(ruleta PROPERTIES
+set_target_properties(${PROJECT_NAME} PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -85,12 +95,12 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
 endif()
 
 include(GNUInstallDirs)
-install(TARGETS ruleta
+install(TARGETS ${PROJECT_NAME}
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(ruleta)
+    qt_finalize_executable(${PROJECT_NAME})
 endif()

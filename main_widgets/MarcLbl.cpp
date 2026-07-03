@@ -1,3 +1,8 @@
+/* =================================================== *
+ * ====        Copyright (c) 2024 icampsi         ==== *
+ * ==== SPDX-License-Identifier: GPL-3.0-or-later ==== *
+ * =================================================== */
+
 #include "MarcLbl.h"
 #include "ui_MarcLbl.h"
 
@@ -28,7 +33,7 @@ MarcLbl::MarcLbl(QWidget *parent)
 
     setStyleSheet(widgetColorString);
 
-    // Set text color for labels
+    // Text color
     QString labelTextColor = QString("color: %1;").arg("white");
     ui->label_name->setStyleSheet(labelTextColor);
     ui->label_score->setStyleSheet(labelTextColor);
@@ -40,7 +45,7 @@ MarcLbl::MarcLbl(QWidget *parent)
     ui->label_name->setFont(font);
     ui->label_score->setFont(font);
 
-    // Apply hardcoded colors to the buttons (if needed)
+    // Color '+' and '-' buttons
     ui->pushButton_add->setStyleSheet("QPushButton { background-color: rgba(0, 255, 0, 255); }");
     ui->pushButton_subs->setStyleSheet("QPushButton { background-color: rgba(255, 0, 0, 255); }");
     updateScore();
@@ -52,13 +57,13 @@ void MarcLbl::updateScore() {
 }
 
 void MarcLbl::on_pushButton_add_clicked() {
-    m_score++;
+    ++m_score;
     updateScore();
 }
 
 
 void MarcLbl::on_pushButton_subs_clicked() {
-    m_score--;
+    --m_score;
     updateScore();
 }
 

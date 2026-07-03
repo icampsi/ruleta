@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/fonts">
+        <file>fonts/Chewy-Regular.ttf</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>b.jpg</file>
+        <file>r.png</file>
+    </qresource>
+    <qresource prefix="/sound">
+        <file>circus.mp3</file>
+        <file>end.mp3</file>
+    </qresource>
+</RCC>
