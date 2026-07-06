@@ -19,6 +19,7 @@ jobs:
           host: 'mac'
           target: 'desktop'
           arch: 'clang_64'
+          modules: 'qtmultimedia'
 
       - name: Configure with CMake
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
