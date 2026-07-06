@@ -19,20 +19,33 @@ jobs:
           host: 'mac'
           target: 'desktop'
           arch: 'clang_64'
+          modules: 'qtmultimedia'
 
       - name: Configure with CMake
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+        run: |
+          cmake -S . -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=12.0
 
       - name: Build
         run: cmake --build build --config Release
 
-      - name: Find app bundle
-        run: find build -name "*.app" -type d
+      - name: Check app binary
+        run: |
+          APP_PATH=$(find build -name "*.app" -type d | head -n 1)
+          EXECUTABLE=$(find "$APP_PATH/Contents/MacOS" -type f | head -n 1)
+
+          echo "App path: $APP_PATH"
+          echo "Executable: $EXECUTABLE"
+
+          file "$EXECUTABLE"
+          otool -l "$EXECUTABLE" | grep -A4 LC_BUILD_VERSION
 
       - name: Package app with macdeployqt
         run: |
           APP_PATH=$(find build -name "*.app" -type d | head -n 1)
-          echo "Found app: $APP_PATH"
+          echo "Packaging app: $APP_PATH"
           macdeployqt "$APP_PATH" -dmg
 
       - name: Upload macOS build
