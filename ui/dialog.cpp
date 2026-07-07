@@ -57,6 +57,8 @@ Dialog::Dialog(QWidget *parent)
             background-color: #f77f00;
         }
     )");
+
+    ui->lineEdit->setFocus();
 }
 
 Dialog::~Dialog() { delete ui; }
