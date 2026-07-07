@@ -27,17 +27,21 @@ Marcador::Marcador(QWidget *parent) :
 
     setStyleSheet(widgetColorString);
 
-    QLabel *title = new QLabel(this);
-    title->setText("--- GRUPS ---");
-    QString family = qApp->property("chewyFontFamily").toString();
+    { // Create title
+        QLabel *title = new QLabel(this);
+        title->setText("--- GRUPS ---");
 
-    QFont font(family);
-    font.setBold(true);
-    font.setPointSize(30);
-    title->setFont(font);
-    title->setMinimumWidth(300);
-    title->setAlignment(Qt::AlignCenter);
-    layout->addWidget(title);
+        QString family = qApp->property("chewyFontFamily").toString();
+        QFont font(family);
+        font.setBold(true);
+        font.setPointSize(30);
+        title->setFont(font);
+
+        title->setMinimumWidth(300);
+        title->setAlignment(Qt::AlignCenter);
+
+        layout->addWidget(title);
+    }
 }
 
 Marcador::~Marcador() {
@@ -58,7 +62,7 @@ MarcLbl* Marcador::addLabel(const QString& name) {
 }
 
 void Marcador::deleteLbl() {
-    if (m_lbl.size() > 0) { // Don't allow deletition of first label since its the title
+    if (!m_lbl.empty()) {
         layout->removeWidget(m_lbl.back());
         delete m_lbl.back();
         m_lbl.pop_back();
