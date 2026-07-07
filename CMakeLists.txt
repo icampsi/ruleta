@@ -53,16 +53,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${MAIN_FILES}
         resources/resources.qrc
     )
-
 else()
-    if(ANDROID)
-        add_library(${PROJECT_NAME} SHARED
-        )
-    else()
-        add_executable(${PROJECT_NAME}
-            ${MAIN_FILES}
-        )
-    endif()
+    add_executable(${PROJECT_NAME}
+        ${MAIN_FILES}
+        resources/resources.qrc
+    )
 endif()
 
 # Set the output directory for the executable
