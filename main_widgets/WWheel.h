@@ -24,7 +24,7 @@ public:
     ~WWheel();
 
     void paintEvent(QPaintEvent *event) override;
-    void fadeOut(QAudioOutput *output);
+    void fadeOut(QAudioOutput *output, int fadeTickTime, double fadeDeccPerTick);
 
     void setMarcador(Marcador* marc) { m_marcador = marc; }
     void addNewLabel(const QString&& name) { m_marcador->addLabel(name); }
@@ -50,12 +50,12 @@ private:
     QTimer* m_timer;
     int     m_rotationAngle;
     int     m_rotationDuration;
-    int     m_slow      = 3;
-    double  m_speed     = 35.;
-    double  m_timerTime = 30.;
-    bool    m_stopping  = false;
-    bool m_forceStopping = false;
-    int m_forceStopTicks = 0;
+    int     m_slow           = 3;
+    double  m_speed          = 35.;
+    double  m_timerTime      = 30.;
+    bool    m_stopping       = false;
+    bool    m_forceStopping  = false;
+    int     m_forceStopTicks = 0;
 
     // Audio Player
     QMediaPlayer* m_spinPlayer;

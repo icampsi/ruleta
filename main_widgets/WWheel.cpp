@@ -273,8 +273,8 @@ void WWheel::updateRotation()
             m_speed -= 0.07;
     }
 
-    if (m_speed <= 2.0 && !m_forceStopping) {
-        fadeOut(m_spinAudioOut);
+    if (m_speed <= 2.0) {
+        fadeOut(m_spinAudioOut, 20, 0.01);
     }
 
     if (m_speed <= 0.0) {
@@ -282,7 +282,6 @@ void WWheel::updateRotation()
         m_forceStopping = false;
 
         m_timer->stop();
-        m_spinPlayer->stop();
         m_stopPlayer->play();
         m_spinButton->setText("GIRA LA RODA!");
     }
@@ -290,13 +289,13 @@ void WWheel::updateRotation()
     update();
 }
 
-void WWheel::fadeOut(QAudioOutput *output) {
+void WWheel::fadeOut(QAudioOutput *output, int fadeTickTime, double fadeDeccPerTick) {
     double vol = output->volume();
     QTimer *t = new QTimer(this);
 
     connect(t, &QTimer::timeout, this, [=]() mutable {
         // Decrease volume
-        vol -= 0.01;
+        vol -= fadeDeccPerTick;
         if (vol <= 0) {
             vol = 0;
             t->stop();
@@ -307,7 +306,7 @@ void WWheel::fadeOut(QAudioOutput *output) {
         output->setVolume(vol);
     });
 
-    t->start(25);
+    t->start(fadeTickTime);
 }
 
 void WWheel::changeRouletteImage(const QString &imagePath)
