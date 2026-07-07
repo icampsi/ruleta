@@ -27,6 +27,9 @@ int main(int argc, char *argv[]) {
     int id = QFontDatabase::addApplicationFont(":/fonts/fonts/Chewy-Regular.ttf");
     if (id == -1) {
         qDebug() << "Could not load Chewy font";
+    } else {
+        QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+        qApp->setProperty("chewyFontFamily", family);
     }
 
     MainWindow MainWindow;

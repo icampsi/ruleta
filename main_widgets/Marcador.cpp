@@ -6,6 +6,9 @@
 #include "Marcador.h"
 #include "MarcLbl.h"
 #include <QRandomGenerator>
+#include <qlabel.h>
+#include <qDebug>
+#include <QFontDatabase>
 
 Marcador::Marcador(QWidget *parent) :
     QWidget(parent), ui(new Ui::Marcador), m_lbl()
@@ -23,6 +26,18 @@ Marcador::Marcador(QWidget *parent) :
                                     .arg(128);
 
     setStyleSheet(widgetColorString);
+
+    QLabel *title = new QLabel(this);
+    title->setText("--- GRUPS ---");
+    QString family = qApp->property("chewyFontFamily").toString();
+
+    QFont font(family);
+    font.setBold(true);
+    font.setPointSize(30);
+    title->setFont(font);
+    title->setMinimumWidth(300);
+    title->setAlignment(Qt::AlignCenter);
+    layout->addWidget(title);
 }
 
 Marcador::~Marcador() {
@@ -33,15 +48,17 @@ Marcador::~Marcador() {
     delete ui;
 }
 
-void Marcador::addLabel(const QString& name) {
+MarcLbl* Marcador::addLabel(const QString& name) {
     MarcLbl *newMarcLbl = new MarcLbl(this);
     layout->addWidget(newMarcLbl);
     newMarcLbl->setName(name);
     m_lbl.push_back(newMarcLbl);
+
+    return newMarcLbl;
 }
 
 void Marcador::deleteLbl() {
-    if (!m_lbl.empty()) {
+    if (m_lbl.size() > 0) { // Don't allow deletition of first label since its the title
         layout->removeWidget(m_lbl.back());
         delete m_lbl.back();
         m_lbl.pop_back();

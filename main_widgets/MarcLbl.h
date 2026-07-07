@@ -16,6 +16,8 @@ public:
     explicit MarcLbl(QWidget *parent = nullptr);
     void updateScore();
     void setName(const QString& name);
+    void hideScore();
+
 signals:
 
 private slots:

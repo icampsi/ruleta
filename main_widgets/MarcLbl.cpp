@@ -71,3 +71,8 @@ void MarcLbl::setName(const QString& name) {
     ui->label_name->setText(name);
 }
 
+void MarcLbl::hideScore() {
+    ui->label_score->hide();
+    ui->buttons_frame->hide();
+}
+

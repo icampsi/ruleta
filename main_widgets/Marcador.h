@@ -30,7 +30,7 @@ public:
     void deleteLbl();
 
 public slots:
-    void addLabel(const QString& name);
+    MarcLbl* addLabel(const QString& name);
 
 private:
     Ui::Marcador *ui;
