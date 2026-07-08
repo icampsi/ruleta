@@ -1,4 +1,4 @@
-name: Build Qt App
+name: Build macOS Qt App
 
 on:
   workflow_dispatch:
@@ -54,81 +54,3 @@ jobs:
         with:
           name: ruleta-macOS-12-universal
           path: build/**/*.dmg
-
-  build-linux:
-    name: Build Linux x64
-    runs-on: ubuntu-24.04
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install Linux dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y \
-            build-essential \
-            cmake \
-            ninja-build \
-            libgl1-mesa-dev \
-            libxkbcommon-x11-0 \
-            libxcb-cursor0 \
-            libpulse-dev \
-            libasound2-dev \
-            libfontconfig1 \
-            libfreetype6 \
-            libx11-xcb1 \
-            libxcb1 \
-            libxcb-glx0 \
-            libxcb-keysyms1 \
-            libxcb-image0 \
-            libxcb-shm0 \
-            libxcb-icccm4 \
-            libxcb-sync1 \
-            libxcb-xfixes0 \
-            libxcb-shape0 \
-            libxcb-randr0 \
-            libxcb-render-util0
-
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v4
-        with:
-          version: '6.8.*'
-          host: 'linux'
-          target: 'desktop'
-          arch: 'linux_gcc_64'
-          modules: 'qtmultimedia'
-
-      - name: Configure with CMake
-        run: |
-          cmake -S . -B build \
-            -G Ninja \
-            -DCMAKE_BUILD_TYPE=Release
-
-      - name: Build
-        run: cmake --build build
-
-      - name: Package Linux build
-        run: |
-          mkdir -p dist/ruleta-linux-x64
-
-          APP="build/bin/ruleta"
-
-          if [ ! -f "$APP" ]; then
-            echo "Could not find executable at $APP"
-            echo "Available executable files:"
-            find build -type f -executable
-            exit 1
-          fi
-
-          echo "Executable: $APP"
-
-          cp "$APP" dist/ruleta-linux-x64/
-
-          tar -czf ruleta-linux-x64.tar.gz -C dist ruleta-linux-x64
-
-      - name: Upload Linux build
-        uses: actions/upload-artifact@v4
-        with:
-          name: ruleta-linux-x64
-          path: ruleta-linux-x64.tar.gz
