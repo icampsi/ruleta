@@ -18,7 +18,7 @@
 */
 
 #include <QApplication>
-#include <qmenubar.h>
+#include <QMenubar.h>
 #include <ui/MainWindow.h>
 #include <QFontDatabase>
 

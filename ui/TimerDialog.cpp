@@ -1,5 +1,5 @@
 #include "TimerDialog.h"
-#include "qevent.h"
+#include <QEvent.h>
 #include "ui/ui_TimerDialog.h"
 
 TimerDialog::TimerDialog(QWidget *parent)

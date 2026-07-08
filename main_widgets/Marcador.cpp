@@ -6,8 +6,8 @@
 #include "Marcador.h"
 #include "MarcLbl.h"
 #include <QRandomGenerator>
-#include <qlabel.h>
-#include <qDebug>
+#include <Qlabel.h>
+#include <QDebug>
 #include <QFontDatabase>
 
 Marcador::Marcador(QWidget *parent) :
