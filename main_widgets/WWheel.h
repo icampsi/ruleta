@@ -14,6 +14,7 @@ class QPushButton;
 class Qpixmap;
 class QMediaPlayer;
 class QAudioOutput;
+class Marcador;
 
 namespace Ui { class WWheel; }
 

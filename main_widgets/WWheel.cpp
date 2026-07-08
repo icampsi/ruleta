@@ -7,8 +7,7 @@
 
 #include "ui_WWheel.h"
 
-#include <QEvent.h>
-
+#include <QEvent>
 #include <QPainter>
 #include <QTime>
 #include <QTimer>
@@ -16,7 +15,8 @@
 #include <QAudioOutput>
 #include <QPainterPath>
 #include <QPushButton>
-#include <QMediaplayer.h>
+#include <QMediaplayer>
+#include <QGridLayout>
 
 WWheel::WWheel(QWidget *parent) :
     QWidget(parent), ui(new Ui::WWheel), m_rotationAngle(0), m_rotationDuration(50), m_wheelImage(":/images/r.png")
