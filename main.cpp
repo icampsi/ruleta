@@ -18,9 +18,10 @@
 */
 
 #include <QApplication>
-#include <QMenubar.h>
-#include <ui/MainWindow.h>
+#include <QMenubar>
 #include <QFontDatabase>
+
+#include "ui/MainWindow.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
