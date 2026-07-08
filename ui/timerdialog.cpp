@@ -1,5 +1,5 @@
-#include "TimerDialog.h"
-#include "ui/ui_TimerDialog.h"
+#include "timerdialog.h"
+#include "ui/ui_timerdialog.h"
 
 #include <QKeyEvent>
 

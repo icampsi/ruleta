@@ -49,15 +49,15 @@ set(MAIN_FILES
     # SRC
     main.cpp
     # MAIN_WIDGETS
-    main_widgets/WWheel.h       main_widgets/WWheel.cpp     main_widgets/WWheel.ui
-    main_widgets/MarcLbl.h      main_widgets/MarcLbl.cpp    main_widgets/MarcLbl.ui
-    main_widgets/Marcador.h     main_widgets/Marcador.cpp   main_widgets/Marcador.ui
-    main_widgets/CTimer.h       main_widgets/CTimer.cpp     main_widgets/CTimer.ui
+    main_widgets/wheel.h       main_widgets/wheel.cpp     main_widgets/wheel.ui
+    main_widgets/marcLbl.h      main_widgets/marcLbl.cpp    main_widgets/marcLbl.ui
+    main_widgets/marcador.h     main_widgets/marcador.cpp   main_widgets/marcador.ui
+    main_widgets/timer.h       main_widgets/timer.cpp     main_widgets/timer.ui
 
     # UI
-    ui/MainWindow.h ui/MainWindow.cpp ui/MainWindow.ui
+    ui/mainwindow.h ui/mainwindow.cpp ui/mainwindow.ui
     ui/dialog.h ui/dialog.cpp ui/dialog.ui
-    ui/TimerDialog.h ui/TimerDialog.cpp ui/TimerDialog.ui
+    ui/timerdialog.h ui/timerdialog.cpp ui/timerdialog.ui
     ui/propertiesdialog.h ui/propertiesdialog.cpp ui/propertiesdialog.ui
 )
 

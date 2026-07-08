@@ -6,7 +6,7 @@
 #ifndef MARCADOR_H
 #define MARCADOR_H
 
-#include "ui_Marcador.h"
+#include "ui_marcador.h"
 
 #include <QWidget>
 

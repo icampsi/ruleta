@@ -3,20 +3,20 @@
  * ==== SPDX-License-Identifier: GPL-3.0-or-later ==== *
  * =================================================== */
 
-#ifndef CTIMER_H
-#define CTIMER_H
+#ifndef TIMER_H
+#define TIMER_H
 
 #include <QTimer>
 #include <QWidget>
 
-namespace Ui { class CTimer; }
+namespace Ui { class Timer; }
 
-class CTimer : public QWidget {
+class Timer : public QWidget {
     Q_OBJECT
 
 public:
-    explicit CTimer(QWidget *parent = nullptr);
-    ~CTimer();
+    explicit Timer(QWidget *parent = nullptr);
+    ~Timer();
 
     void startTimer() { m_timer.start(10); }
     void stopTimer()  { m_timer.stop(); }
@@ -27,10 +27,10 @@ public:
     const size_t& getDuration() const  { return m_duration; }
 
 private:
-    Ui::CTimer *ui;
+    Ui::Timer *ui;
     QTimer m_timer;
     size_t m_duration;
     size_t m_elapsedTime;
 };
 
-#endif // CTIMER_H
+#endif // TIMER_H

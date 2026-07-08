@@ -15,15 +15,15 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="CTimer" name="widget" native="true"/>
+    <widget class="Timer" name="widget" native="true"/>
    </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CTimer</class>
+   <class>Timer</class>
    <extends>QWidget</extends>
-   <header>main_widgets/CTimer.h</header>
+   <header>main_widgets/timer.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

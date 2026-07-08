@@ -3,8 +3,8 @@
  * ==== SPDX-License-Identifier: GPL-3.0-or-later ==== *
  * =================================================== */
 
-#include "Marcador.h"
-#include "MarcLbl.h"
+#include "marcador.h"
+#include "marcLbl.h"
 #include <QRandomGenerator>
 #include <QLabel>
 #include <QDebug>

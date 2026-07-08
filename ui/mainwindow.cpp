@@ -3,11 +3,11 @@
  * ==== SPDX-License-Identifier: GPL-3.0-or-later ==== *
  * =================================================== */
 
-#include "MainWindow.h"
-#include "ui/TimerDialog.h"
+#include "mainwindow.h"
+#include "ui/timerdialog.h"
 #include "ui/dialog.h"
 #include "ui/propertiesdialog.h"
-#include "ui_MainWindow.h"
+#include "ui_mainwindow.h"
 
 #include <QPainter.h>
 #include <QKeyEvent>

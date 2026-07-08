@@ -3,10 +3,10 @@
  * ==== SPDX-License-Identifier: GPL-3.0-or-later ==== *
  * =================================================== */
 
-#ifndef WWHEEL_H
-#define WWHEEL_H
+#ifndef WHEEL_H
+#define WHEEL_H
 
-#include "Marcador.h"
+#include "marcador.h"
 #include <QWidget>
 
 class QTimer;
@@ -16,14 +16,14 @@ class QMediaPlayer;
 class QAudioOutput;
 class Marcador;
 
-namespace Ui { class WWheel; }
+namespace Ui { class Wheel; }
 
-class WWheel : public QWidget {
+class Wheel : public QWidget {
     Q_OBJECT
 
 public:
-    explicit WWheel(QWidget *parent = nullptr);
-    ~WWheel();
+    explicit Wheel(QWidget *parent = nullptr);
+    ~Wheel();
 
     void paintEvent(QPaintEvent *event) override;
     void fadeOut(QAudioOutput *output, int fadeTickTime, double fadeDeccPerTick);
@@ -46,7 +46,7 @@ private slots:
     void updateRotation();
 
 private:
-    Ui::WWheel *ui;
+    Ui::Wheel *ui;
 
     //Spin related
     QTimer* m_timer;
@@ -100,4 +100,4 @@ public:
     }
 };
 
-#endif // WWHEEL_H
+#endif // WHEEL_H

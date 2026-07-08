@@ -3,9 +3,9 @@
  * ==== SPDX-License-Identifier: GPL-3.0-or-later ==== *
  * =================================================== */
 
-#include "WWheel.h"
+#include "wheel.h"
 
-#include "ui_WWheel.h"
+#include "ui_wheel.h"
 
 #include <QEvent>
 #include <QPainter>
@@ -18,14 +18,14 @@
 #include <QMediaPlayer>
 #include <QGridLayout>
 
-WWheel::WWheel(QWidget *parent) :
-    QWidget(parent), ui(new Ui::WWheel), m_rotationAngle(0), m_rotationDuration(50), m_wheelImage(":/images/r.png")
+Wheel::Wheel(QWidget *parent) :
+    QWidget(parent), ui(new Ui::Wheel), m_rotationAngle(0), m_rotationDuration(50), m_wheelImage(":/images/r.png")
 {
     ui->setupUi(this);
 
     // Timer
     m_timer = new QTimer(this);
-    connect(m_timer, &QTimer::timeout, this, &WWheel::updateRotation);
+    connect(m_timer, &QTimer::timeout, this, &Wheel::updateRotation);
 
 
     {   // UI
@@ -108,13 +108,13 @@ WWheel::WWheel(QWidget *parent) :
 }
 
 
-WWheel::~WWheel() {
+Wheel::~Wheel() {
     delete ui;
     delete m_spinAudioOut;
     delete m_timer;
 }
 
-void WWheel::paintEvent(QPaintEvent *event) {
+void Wheel::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event);
 
     /* BOOKMARK - This code slices the circle in equal parts to be able to dinamically decide the
@@ -203,7 +203,7 @@ void WWheel::paintEvent(QPaintEvent *event) {
     drawArrow();
 }
 
-void WWheel::drawWheel()
+void Wheel::drawWheel()
 {
 
     QPainter painter(this);
@@ -220,7 +220,7 @@ void WWheel::drawWheel()
     painter.resetTransform();
 }
 
-void WWheel::drawArrow() {
+void Wheel::drawArrow() {
     QPainter painter(this);
     int w    = width();
     int h    = height();
@@ -234,7 +234,7 @@ void WWheel::drawArrow() {
     painter.drawPolygon(arrow);
 }
 
-void WWheel::spin()
+void Wheel::spin()
 {
     m_forceStopping  = false;
     m_forceStopTicks = 0;
@@ -254,7 +254,7 @@ void WWheel::spin()
     m_spinButton->setText("STOP!");
 }
 
-void WWheel::updateRotation()
+void Wheel::updateRotation()
 {
     m_rotationAngle += m_speed;
 
@@ -292,7 +292,7 @@ void WWheel::updateRotation()
     update();
 }
 
-void WWheel::fadeOut(QAudioOutput *output, int fadeTickTime, double fadeDeccPerTick) {
+void Wheel::fadeOut(QAudioOutput *output, int fadeTickTime, double fadeDeccPerTick) {
     double vol = output->volume();
     QTimer *t = new QTimer(this);
 
@@ -312,24 +312,24 @@ void WWheel::fadeOut(QAudioOutput *output, int fadeTickTime, double fadeDeccPerT
     t->start(fadeTickTime);
 }
 
-void WWheel::changeRouletteImage(const QString &imagePath)
+void Wheel::changeRouletteImage(const QString &imagePath)
 {
     m_wheelImage.load(imagePath);
     update();
 }
 
-void WWheel::changeSpinnAudio(const QString &spinnAudioPath)
+void Wheel::changeSpinnAudio(const QString &spinnAudioPath)
 {
     m_spinPlayer->setSource(QUrl::fromLocalFile(spinnAudioPath));
 
 }
 
-void WWheel::changeEndAudio(const QString &endAudioPath)
+void Wheel::changeEndAudio(const QString &endAudioPath)
 {
     m_stopPlayer->setSource(QUrl::fromLocalFile(endAudioPath));
 }
 
-void WWheel::stopWheel()
+void Wheel::stopWheel()
 {
     if (!m_timer->isActive())
         return;

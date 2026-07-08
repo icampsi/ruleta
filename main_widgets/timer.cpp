@@ -3,12 +3,12 @@
  * ==== SPDX-License-Identifier: GPL-3.0-or-later ==== *
  * =================================================== */
 
-#include "CTimer.h"
-#include "ui/ui_CTimer.h"
+#include "timer.h"
+#include "ui/ui_timer.h"
 
 
-CTimer::CTimer(QWidget *parent)
-    : QWidget(parent), ui(new Ui::CTimer), m_timer(this), m_duration{10000}, m_elapsedTime{0}
+Timer::Timer(QWidget *parent)
+    : QWidget(parent), ui(new Ui::Timer), m_timer(this), m_duration{10000}, m_elapsedTime{0}
 {
     ui->setupUi(this);
 
@@ -43,24 +43,24 @@ CTimer::CTimer(QWidget *parent)
                                         );
 
 
-    connect(&m_timer, &QTimer::timeout, this, &CTimer::updateTime);
-    connect(ui->pushButton_start, &QPushButton::clicked, this, &CTimer::startTimer);
-    connect(ui->pushButton_stop , &QPushButton::clicked, this, &CTimer::stopTimer);
-    connect(ui->pushButton_reset, &QPushButton::clicked, this, &CTimer::resetTimer);
+    connect(&m_timer, &QTimer::timeout, this, &Timer::updateTime);
+    connect(ui->pushButton_start, &QPushButton::clicked, this, &Timer::startTimer);
+    connect(ui->pushButton_stop , &QPushButton::clicked, this, &Timer::stopTimer);
+    connect(ui->pushButton_reset, &QPushButton::clicked, this, &Timer::resetTimer);
 }
 
-CTimer::~CTimer() {
+Timer::~Timer() {
     delete ui;
 }
 
 
-void CTimer::resetTimer() {
+void Timer::resetTimer() {
     m_timer.stop();
     m_elapsedTime = 0;
     ui->lcdDisplay->display("00:00:00:00");
 }
 
-void CTimer::updateTime() {
+void Timer::updateTime() {
     m_elapsedTime++;
     int minutes = (m_elapsedTime % 360000) / 6000;
     int seconds = (m_elapsedTime % 6000) / 100;
