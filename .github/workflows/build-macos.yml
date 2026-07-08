@@ -1,11 +1,11 @@
-name: Build macOS Qt App
+name: Build Qt App
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:
   build-macos:
+    name: Build macOS Universal
     runs-on: macos-15
 
     steps:
@@ -40,6 +40,7 @@ jobs:
           echo "Executable: $EXECUTABLE"
 
           file "$EXECUTABLE"
+          lipo -info "$EXECUTABLE"
           otool -l "$EXECUTABLE" | grep -A4 LC_BUILD_VERSION
 
       - name: Package app with macdeployqt
@@ -51,5 +52,78 @@ jobs:
       - name: Upload macOS build
         uses: actions/upload-artifact@v4
         with:
-          name: macOS-build
+          name: Ruleta-macOS-12-universal
           path: build/**/*.dmg
+
+  build-linux:
+    name: Build Linux x64
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Linux dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            build-essential \
+            cmake \
+            ninja-build \
+            libgl1-mesa-dev \
+            libxkbcommon-x11-0 \
+            libxcb-cursor0 \
+            libpulse-dev \
+            libasound2-dev \
+            libfontconfig1 \
+            libfreetype6 \
+            libx11-xcb1 \
+            libxcb1 \
+            libxcb-glx0 \
+            libxcb-keysyms1 \
+            libxcb-image0 \
+            libxcb-shm0 \
+            libxcb-icccm4 \
+            libxcb-sync1 \
+            libxcb-xfixes0 \
+            libxcb-shape0 \
+            libxcb-randr0 \
+            libxcb-render-util0
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.*'
+          host: 'linux'
+          target: 'desktop'
+          arch: 'linux_gcc_64'
+          modules: 'qtmultimedia'
+
+      - name: Configure with CMake
+        run: |
+          cmake -S . -B build \
+            -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Package Linux build
+        run: |
+          mkdir -p dist/Ruleta-linux-x64
+
+          APP=$(find build -type f -executable -name "Ruleta" | head -n 1)
+
+          echo "Executable: $APP"
+
+          cp "$APP" dist/Ruleta-linux-x64/
+          cp -r assets dist/Ruleta-linux-x64/ 2>/dev/null || true
+          cp -r resources dist/Ruleta-linux-x64/ 2>/dev/null || true
+
+          tar -czf Ruleta-linux-x64.tar.gz -C dist Ruleta-linux-x64
+
+      - name: Upload Linux build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ruleta-linux-x64
+          path: Ruleta-linux-x64.tar.gz
