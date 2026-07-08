@@ -6,7 +6,7 @@
 #include "Marcador.h"
 #include "MarcLbl.h"
 #include <QRandomGenerator>
-#include <Qlabel.h>
+#include <QLabel.h>
 #include <QDebug>
 #include <QFontDatabase>
 

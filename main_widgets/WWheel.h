@@ -13,6 +13,7 @@ class QTimer;
 class QPushButton;
 class Qpixmap;
 class QMediaPlayer;
+class QAudioOutput;
 
 namespace Ui { class WWheel; }
 

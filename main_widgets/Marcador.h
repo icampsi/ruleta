@@ -8,14 +8,10 @@
 
 #include "ui_Marcador.h"
 
-#include <QVBoxLayout>
 #include <QWidget>
-#include <QTimer>
-#include <QPushButton>
-#include <QPixmap>
-#include <QtMultimedia/QMediaPlayer>
 
 class MarcLbl;
+class QVboxLayout;
 
 namespace Ui { class Marcador; }
 
