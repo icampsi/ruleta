@@ -1,12 +1,30 @@
 # Ruleta
 
-This is a small app I needed fast for a summer camp activity and made on the spot. Now I've cleaned the code a little bit and added some functionality to dinamically personalize it.
+A small app I built quickly for a summer camp activity. I’ve since cleaned up the code and added a few features to make it dynamically customizable.
 
-The Roulette itself is simply a jpg that spins. I tried to made it programatically so it can automatically adjust and add text/icons on each slice, but making it beautifull requires way more effort than it's worth since you can allways create a better image in a second with canva or even IA nowadays.
+## Features
+- Customizable roulette and background.
+- Customizable sounds.
+- In-app timer as a non-modal dialog.
+- Dynamically add new players and keep track of points.
 
-Leave full screen to get a menu or use shortcuts:
-t = opens a timer
-m = creates new team
-r = removes last team created
+### Note on how to customize the roulette itself:
+The roulette wheel itself is nothing more than a simple spinning JPG image. I made a version that draws it programmatically so it would be dynamically customizable, automatically adding text and icons to each slice, but making it look good required more effort than it was worth, especially for the text in the slices. The code is still commented inside `WWheel.cpp`. Nowadays, you can easily create a better-looking wheel image in minutes with Canva or an AI image tool and load it to personalize the actual trials pointed to by the roulette.
 
-Fare warning: The kids (or players in any case) may end up hating the song. You can change it, try to avoid that with some jokes or something or simply wake them up next morning with the song full volume as I did, and keep ninja-playing it for the rest of the summer camp.
+
+## Controls
+
+Exit full-screen mode to access the menu, or use the keyboard shortcuts:
+
+| Key | Action                       |
+| --- | ---------------------------- |
+| `T` | Open the timer               |
+| `M` | Create a new team            |
+| `R` | Remove the last created team |
+
+## Fair Warning
+
+The kids, or players in general, may eventually end up hating the song. You can change it, try to soften the damage with jokes, or fully commit: wake them up the next morning with the song at full volume, as I did, and keep ninja-playing it for the rest of the summer camp.
+
+## Screenshot
+![Ruleta screenshot](docs/images/App_screenshot.png)
