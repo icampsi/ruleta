@@ -52,7 +52,7 @@ jobs:
       - name: Upload macOS build
         uses: actions/upload-artifact@v4
         with:
-          name: Ruleta-macOS-12-universal
+          name: ruleta-macOS-12-universal
           path: build/**/*.dmg
 
   build-linux:
@@ -110,20 +110,25 @@ jobs:
 
       - name: Package Linux build
         run: |
-          mkdir -p dist/Ruleta-linux-x64
+          mkdir -p dist/ruleta-linux-x64
 
-          APP=$(find build -type f -executable -name "Ruleta" | head -n 1)
+          APP="build/bin/ruleta"
+
+          if [ ! -f "$APP" ]; then
+            echo "Could not find executable at $APP"
+            echo "Available executable files:"
+            find build -type f -executable
+            exit 1
+          fi
 
           echo "Executable: $APP"
 
-          cp "$APP" dist/Ruleta-linux-x64/
-          cp -r assets dist/Ruleta-linux-x64/ 2>/dev/null || true
-          cp -r resources dist/Ruleta-linux-x64/ 2>/dev/null || true
+          cp "$APP" dist/ruleta-linux-x64/
 
-          tar -czf Ruleta-linux-x64.tar.gz -C dist Ruleta-linux-x64
+          tar -czf ruleta-linux-x64.tar.gz -C dist ruleta-linux-x64
 
       - name: Upload Linux build
         uses: actions/upload-artifact@v4
         with:
-          name: Ruleta-linux-x64
-          path: Ruleta-linux-x64.tar.gz
+          name: ruleta-linux-x64
+          path: ruleta-linux-x64.tar.gz

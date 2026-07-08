@@ -9,8 +9,22 @@ project(ruleta VERSION 1.0.0 LANGUAGES CXX)
 # Warning level
 if (MSVC)
     add_compile_options(/W4 /WX)
-else()
-    add_compile_options(-Wall -Wextra -pedantic -Werror -Wno-nonportable-include-path -Wno-microsoft-include)
+elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(
+        -Wall
+        -Wextra
+        -pedantic
+        -Werror
+        -Wno-nonportable-include-path
+        -Wno-microsoft-include
+    )
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    add_compile_options(
+        -Wall
+        -Wextra
+        -pedantic
+        -Werror
+    )
 endif()
 
 set(CMAKE_AUTOUIC ON)
@@ -77,13 +91,20 @@ if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.icampsil.ruleta)
 endif()
 
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    ${BUNDLE_ID_OPTION}
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
+if(APPLE)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        ${BUNDLE_ID_OPTION}
+        MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+        MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+        MACOSX_BUNDLE TRUE
+    )
+endif()
+
+if(WIN32)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        WIN32_EXECUTABLE TRUE
+    )
+endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     add_definitions(-DQT_NO_DEBUG_OUTPUT)
