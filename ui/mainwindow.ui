@@ -113,7 +113,7 @@
   <customwidget>
    <class>Marcador</class>
    <extends>QWidget</extends>
-   <header>main_widgets/Marcador.h</header>
+   <header>main_widgets/marcador.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
