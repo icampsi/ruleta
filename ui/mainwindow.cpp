@@ -9,7 +9,7 @@
 #include "ui/propertiesdialog.h"
 #include "ui_mainwindow.h"
 
-#include <QPainter.h>
+#include <QPainter>
 #include <QKeyEvent>
 #include <QShortcut>
 
