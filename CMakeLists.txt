@@ -50,7 +50,7 @@ set(MAIN_FILES
     main.cpp
     # MAIN_WIDGETS
     main_widgets/wheel.h       main_widgets/wheel.cpp     main_widgets/wheel.ui
-    main_widgets/marcLbl.h      main_widgets/marcLbl.cpp    main_widgets/marcLbl.ui
+    main_widgets/marclbl.h      main_widgets/marclbl.cpp    main_widgets/marclbl.ui
     main_widgets/marcador.h     main_widgets/marcador.cpp   main_widgets/marcador.ui
     main_widgets/timer.h       main_widgets/timer.cpp     main_widgets/timer.ui
 

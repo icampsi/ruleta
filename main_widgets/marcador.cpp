@@ -4,7 +4,7 @@
  * =================================================== */
 
 #include "marcador.h"
-#include "marcLbl.h"
+#include "marclbl.h"
 #include <QRandomGenerator>
 #include <QLabel>
 #include <QDebug>
