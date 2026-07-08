@@ -4,7 +4,7 @@
 # =================================================== */
 
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
-project(ruleta VERSION 0.2.1 LANGUAGES CXX)
+project(ruleta VERSION 1.0.0 LANGUAGES CXX)
 
 # Warning level
 if (MSVC)
