@@ -15,7 +15,7 @@
 #include <QAudioOutput>
 #include <QPainterPath>
 #include <QPushButton>
-#include <QMediaplayer>
+#include <QMediaPlayer>
 #include <QGridLayout>
 
 WWheel::WWheel(QWidget *parent) :
