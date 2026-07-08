@@ -1,6 +1,7 @@
 #include "TimerDialog.h"
-#include <QEvent.h>
 #include "ui/ui_TimerDialog.h"
+
+#include <QKeyEvent>
 
 TimerDialog::TimerDialog(QWidget *parent)
     : QDialog(parent), ui(new Ui::TimerDialog)

@@ -4,13 +4,13 @@
  * =================================================== */
 
 #include "MainWindow.h"
-#include <QPainter.h>
 #include "ui/TimerDialog.h"
 #include "ui/dialog.h"
 #include "ui/propertiesdialog.h"
 #include "ui_MainWindow.h"
+
+#include <QPainter.h>
 #include <QKeyEvent>
-#include <QDialog.h>
 #include <QShortcut>
 
 MainWindow::MainWindow(QWidget *parent)

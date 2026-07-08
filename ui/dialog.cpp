@@ -5,7 +5,7 @@
 
 #include "dialog.h"
 #include "ui_dialog.h"
-#include <QEvent.h>
+#include <QKeyEvent>
 
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
